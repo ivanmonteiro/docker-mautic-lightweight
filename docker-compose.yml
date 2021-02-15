@@ -26,7 +26,7 @@ version: '2.2'
       MAUTIC_RUN_CRON_JOBS: true
       PHP_MEMORY_LIMIT: 128M
     volumes:
-      - ./www2-override-mautic-fpm.conf:/usr/local/etc/php-fpm.d/www2-override.conf
+      - ./php-fpm/www2-override-mautic-fpm.conf:/usr/local/etc/php-fpm.d/www2-override.conf
       - ./public/:/var/www/html/      
     # cpus: '0.5'
     # networks:
