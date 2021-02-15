@@ -1,5 +1,6 @@
 # docker-mautic-low-memory
-https://github.com/ivanmonteiro/docker-mautic-low-memory
+Repository: https://github.com/ivanmonteiro/docker-mautic-low-memory
+
 ## Introduction
 The original [docker-mautic](https://github.com/mautic/docker-mautic) image uses too much memory, making it difficult to run on most entry-tier servers which usually has less than 1GB of RAM memory.
 
@@ -7,7 +8,7 @@ Docker-mautic-low-memory uses up to 6x less memory.
 
 Without the modifications listed below, the server RAM was hitting 100% and occasionaly the server would be unresponsive and crash. Tests were running at Google Cloud's free-tier instance [f1-micro](https://cloud.google.com/compute/docs/machine-types) (total 0.6GB memory). 
 
-Now, it runs at idle using ~20mb and occasionally ~120mb when running cron background jobs.
+Now, mautic runs at idle using ~20mb and occasionally ~120mb when running cron background jobs.
 
 ## Improvements to reduce memory usage
 
