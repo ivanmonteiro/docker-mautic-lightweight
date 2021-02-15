@@ -1,0 +1,60 @@
+version: '2.2'
+
+  mysql:
+    # container_name: mysql-mautic
+    restart: unless-stopped
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlrootpassword
+      MYSQL_DATABASE: mautic
+      MYSQL_USER: mautic
+      MYSQL_PASSWORD: mauticdbpass
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  mautic:
+    depends_on:
+      - mysql    
+    # container_name: mautic
+    build: ./mautic
+    restart: unless-stopped
+    environment:
+      MAUTIC_DB_HOST: mysql
+      MAUTIC_DB_USER: mautic
+      MAUTIC_DB_PASSWORD: mauticdbpass
+      MAUTIC_DB_NAME: mautic
+      MAUTIC_RUN_CRON_JOBS: true
+      PHP_MEMORY_LIMIT: 128M
+    volumes:
+      - ./www2-override-mautic-fpm.conf:/usr/local/etc/php-fpm.d/www2-override.conf
+      - ./public/:/var/www/html/      
+    # cpus: '0.5'
+    # networks:
+    #   - mysqlnet
+    #   - appnet
+
+  nginx:
+    depends_on:
+      - mautic
+    # container_name: nginx
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    # mem_limit: 128M
+    volumes:
+      - ./public/:/var/www/html/
+      - ./nginx/mautic-fpm-nginx.conf:/etc/nginx/conf.d/mautic-fpm-nginx.conf
+    # - ./letsencrypt/certbot-etc/:/etc/letsencrypt/
+    # networks:
+    #   - appnet
+
+    # networks:
+#   appnet:
+#     name: appnet
+#   mysqlnet:
+#     external: true
+
+volumes:
+  mysql-data:
