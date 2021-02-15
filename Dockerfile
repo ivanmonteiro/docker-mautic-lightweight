@@ -5,3 +5,5 @@ FROM mautic/mautic:v3-fpm
 # and uses up to 6 times more memory.
 COPY mautic.crontab /etc/cron.d/mautic
 RUN chmod 644 /etc/cron.d/mautic
+
+COPY php-fpm/www2-override-mautic-fpm.conf /usr/local/etc/php-fpm.d/www2-override.conf
