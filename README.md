@@ -1,5 +1,5 @@
 # docker-mautic-low-memory
-
+https://github.com/ivanmonteiro/docker-mautic-low-memory
 ## Introduction
 The original [docker-mautic](https://github.com/mautic/docker-mautic) image uses too much memory, making it difficult to run on most entry-tier servers which usually has less than 1GB of RAM memory.
 
@@ -31,7 +31,9 @@ Optional (but recommended):
 
 ## Usage
 
-Run 
+Clone this repository: https://github.com/ivanmonteiro/docker-mautic-low-memory
+
+And run:
 ```
 docker-compose build
 docker-compose up -d
