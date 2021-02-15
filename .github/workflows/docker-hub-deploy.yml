@@ -36,5 +36,5 @@ jobs:
         with:
           destination_container_repo: ivanmonteiro/docker-mautic-low-memory
           provider: dockerhub
-          short_description: 'my short description 😊'
+          short_description: 'Improves docker-mautic image to run on low mememory servers'
           readme_file: 'README.md'
