@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: Publish docker-mautic-low-memory image
 on:
   release:
     types: [published]
