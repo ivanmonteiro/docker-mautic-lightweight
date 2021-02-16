@@ -1,0 +1,38 @@
+name: Docker Hub Push
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker Login
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag  ivanmonteiro/docker-mautic-low-memory:latest
+  #   - name: Docker Push
+  #     run: docker push ivanmonteiro/docker-mautic-low-memory:latest
+  # PushContainerReadme:
+  #   runs-on: ubuntu-latest
+  #   name: Push README to Docker Hub
+  #   steps:
+  #     - name: git checkout
+  #       uses: actions/checkout@v2
+  #     - name: push README to Dockerhub
+  #       uses: christian-korneck/update-container-description-action@v1
+  #       env:
+  #         DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
+  #         DOCKER_PASS: ${{ secrets.DOCKER_PERSONAL_PASSWORD }}
+  #       with:
+  #         destination_container_repo: ivanmonteiro/docker-mautic-low-memory
+  #         provider: dockerhub
+  #         short_description: 'Improves docker-mautic image to run on low mememory servers'
+  #         readme_file: 'README.md'
