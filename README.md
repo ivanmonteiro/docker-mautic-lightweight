@@ -36,7 +36,6 @@ Clone this repository: https://github.com/ivanmonteiro/docker-mautic-low-memory
 
 And run:
 ```
-docker-compose build
 docker-compose up -d
 ```
 
