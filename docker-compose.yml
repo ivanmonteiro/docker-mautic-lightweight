@@ -14,7 +14,7 @@ version: '2.2'
   mautic:
     depends_on:
       - mysql    
-    image: ivanmonteiro/docker-mautic-low-memory:latest
+    image: ivanmonteiro/docker-mautic-lightweight:latest
     restart: unless-stopped
     environment:
       MAUTIC_DB_HOST: mysql
