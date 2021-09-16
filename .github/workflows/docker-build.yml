@@ -19,7 +19,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ivanmonteiro/docker-mautic-low-memory
+          images: ivanmonteiro/docker-mautic-lightweight
           flavor: |
             latest=true
       -
