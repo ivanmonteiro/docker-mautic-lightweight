@@ -1,22 +1,27 @@
-# docker-mautic-low-memory
-Repository: https://github.com/ivanmonteiro/docker-mautic-low-memory
+# docker-mautic-lightweight
+
 
 ## Introduction
-The original [docker-mautic](https://github.com/mautic/docker-mautic) image uses too much memory, making it difficult to run on most entry-tier servers which usually has less than 1GB of RAM memory.
 
-Docker-mautic-low-memory uses up to 6x less memory. 
+**[docker-mautic-lightweight](https://hub.docker.com/r/ivanmonteiro/docker-mautic-lightweight) uses up to 6x less memory and uses less CPU usage when running background tasks.**
 
-Without the modifications listed below, the server RAM was hitting 100% and occasionaly the server would be unresponsive and crash. Tests were running at Google Cloud's free-tier instance [f1-micro](https://cloud.google.com/compute/docs/machine-types) (total 0.6GB memory). 
+The original [docker-mautic](https://github.com/mautic/docker-mautic) image uses too much memory and CPU, making it difficult to run on modest vps servers. Most entry-tier vps servers of cloud providers has <= 1GB of RAM memory. Also some vps use shared-core CPU with constraints on how much cpu one application can use, e.g., Google Cloud's E2 shared-core instances.
 
-Now, mautic runs at idle using ~20mb and occasionally ~120mb when running cron background jobs.
+Without modifications, the original [docker-matutic](https://github.com/mautic/docker-mautic) image deployeed on a [f1-micro](https://cloud.google.com/compute/docs/machine-types) (0.6GB memory/shared CPU) instance was hitting 100% RAM usage and 100% CPU usage spikes.
+
+Now using docker-mautic-lightweight the same [f1-micro](https://cloud.google.com/compute/docs/machine-types) instance runs at idle using ~20mb and occasionally ~120mb when running cron background jobs.
+
+Github URL: https://github.com/ivanmonteiro/docker-mautic-low-memory
+
+Docker Hub URL: https://hub.docker.com/r/ivanmonteiro/docker-mautic-lightweight
 
 ## Improvements to reduce memory usage
 
-The crontab was changed to avoid running tasks in parallel. The default mautic crontab run too many tasks at the same time.
+Most of the improvements of RAM usage are due to changing the background tasks running on crontab. The default mautic crontab run too many tasks at the same time.
 
-Using php-fpm and nginx also has shown to further reduce memory usage, specially on idle. The file `www2-override-mautic-fpm.conf` limits the maximum child processes and uses about ~20mb when no requests/background jobs are being processed.
+Also, using php-fpm and nginx also has shown to further reduce memory usage, specially at idle. The file `www2-override-mautic-fpm.conf` limits the maximum child processes and uses about ~20mb when no requests are being processed.
 
-The environment variable `PHP_MEMORY_LIMIT` is set to 128MB (original is 512MB). Keep in mind that if you run into errors try to increase mautic's  `PHP_MEMORY_LIMIT` environment variable at `docker-compose.yml`.
+The environment variable `PHP_MEMORY_LIMIT` is set to 128MB (original is 512MB). Keep in mind that if you run into errors try to increase mautic's `PHP_MEMORY_LIMIT` environment variable at `docker-compose.yml`.
 
 ## Pre-requisites
 
