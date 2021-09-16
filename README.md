@@ -25,7 +25,7 @@ Optional (but recommended):
 
 ## Usage
 
-Clone this repository: https://github.com/ivanmonteiro/docker-mautic-low-memory
+Clone this repository: https://github.com/ivanmonteiro/docker-mautic-lightweight
 
 And run:
 ```
@@ -40,7 +40,7 @@ Also, using php-fpm and nginx also has shown to further reduce memory usage, spe
 
 The environment variable `PHP_MEMORY_LIMIT` is set to 128MB (original is 512MB). Keep in mind that if you run into errors try to increase mautic's `PHP_MEMORY_LIMIT` environment variable at `docker-compose.yml`.
 
-Github URL: https://github.com/ivanmonteiro/docker-mautic-low-memory
+Github URL: https://github.com/ivanmonteiro/docker-mautic-lightweight
 
 Docker Hub URL: https://hub.docker.com/r/ivanmonteiro/docker-mautic-lightweight
 
