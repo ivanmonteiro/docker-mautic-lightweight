@@ -11,18 +11,6 @@ Without modifications, the original [docker-matutic](https://github.com/mautic/d
 
 Now using docker-mautic-lightweight the same [f1-micro](https://cloud.google.com/compute/docs/machine-types) instance runs at idle using ~20mb and occasionally ~120mb when running cron background jobs.
 
-Github URL: https://github.com/ivanmonteiro/docker-mautic-low-memory
-
-Docker Hub URL: https://hub.docker.com/r/ivanmonteiro/docker-mautic-lightweight
-
-## Improvements to reduce memory usage
-
-Most of the improvements of RAM usage are due to changing the background tasks running on crontab. The default mautic crontab run too many tasks at the same time.
-
-Also, using php-fpm and nginx also has shown to further reduce memory usage, specially at idle. The file `www2-override-mautic-fpm.conf` limits the maximum child processes and uses about ~20mb when no requests are being processed.
-
-The environment variable `PHP_MEMORY_LIMIT` is set to 128MB (original is 512MB). Keep in mind that if you run into errors try to increase mautic's `PHP_MEMORY_LIMIT` environment variable at `docker-compose.yml`.
-
 ## Pre-requisites
 
 - You should have [docker](https://docs.docker.com/get-docker/) installed and configured at your server.
@@ -43,5 +31,17 @@ And run:
 ```
 docker-compose up -d
 ```
+
+## Improvements to reduce memory usage
+
+Most of the improvements of RAM usage are due to changing the background tasks running on crontab. The default mautic crontab run too many tasks at the same time.
+
+Also, using php-fpm and nginx also has shown to further reduce memory usage, specially at idle. The file `www2-override-mautic-fpm.conf` limits the maximum child processes and uses about ~20mb when no requests are being processed.
+
+The environment variable `PHP_MEMORY_LIMIT` is set to 128MB (original is 512MB). Keep in mind that if you run into errors try to increase mautic's `PHP_MEMORY_LIMIT` environment variable at `docker-compose.yml`.
+
+Github URL: https://github.com/ivanmonteiro/docker-mautic-low-memory
+
+Docker Hub URL: https://hub.docker.com/r/ivanmonteiro/docker-mautic-lightweight
 
 Contributions are welcome!
