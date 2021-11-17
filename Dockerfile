@@ -1,4 +1,4 @@
-FROM mautic/mautic:v3-fpm
+FROM mautic/mautic:v4-fpm
 
 # Use our custom crontab. This greatly reduces memory usage. 
 # The default crontab of mautic-docker runs up to 6 tasks at the same time
